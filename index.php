@@ -72,8 +72,8 @@
         </div> -->
 
         <div class="nav-right">
-          <a class="transparent-btn" href="login.html">Login</a></li>
-          <a class="outlined-btn" href="register.html">Register</a></li>
+          <a class="transparent-btn" href="login.php">Login</a></li>
+          <a class="outlined-btn" href="register.php">Register</a></li>
         </div>
       </div>
     </nav>
@@ -87,7 +87,7 @@
           <p class="main-content">
             Your go-to platform for discovering and joining hackathons worldwide. Explore, connect, and challenge yourself with the latest hackathons tailored for you. Sign up, stay updated, and start hacking today!
           </p>
-          <a href="register.html" class="primary-btn">Register</a>
+          <a href="register.php" class="primary-btn">Register</a>
         </div>
         
         <div class="main-right">
@@ -101,5 +101,5 @@
 
     <!-- <div class="overflow"></div> -->
   </body>
-  <script src="app.js" defer></script>
+  <script src="app.js"></script>
 </html>

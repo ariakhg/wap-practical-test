@@ -169,6 +169,87 @@ main {
   color: var(--Light-Gray);
 }
 
+/* Register and Login */
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh; 
+}
+
+article {
+  background-color: var(--Darker-Blue);
+  width: 100%; 
+  max-width: 400px; 
+  margin: auto;
+  border-radius: 2rem;
+  padding: 2rem;
+}
+
+article:hover {
+  box-shadow: 0 2px 20px var(--Medium-Gray);
+  transition: ease-in-out 0.3s;
+}
+
+h1.form-title {
+  margin-bottom: 1rem;
+  color: var(--Almost-White);
+}
+
+label {
+  margin-top: 1rem; 
+  color: var(--Light-Gray);
+}
+
+input {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  border: 1px solid var(--Light-Gray);
+  border-radius: 1rem;
+  background-color: var(--Almost-White);
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--Orange);
+}
+
+.registerbtn, .loginbtn {
+  background-color: var(--Orange);
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 1rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin-top: 1rem;
+  transition: 0.3s ease;
+}
+
+.registerbtn:hover, .loginbtn:hover {
+  background-color: var(--Almost-White);
+  transition: 0.3s ease;
+}
+
+.change {
+  color: var(--Light-Gray);
+  text-align: center;
+  font-size: 14px;
+}
+
+.change a {
+  color: var(--Light-Gray);
+}
+
+.change a:hover {
+  color: var(--Almost-White);
+}
+
 /* responsive to mobile */
 /* @media screen and (max-width: 800px) {
   .nav-container {
