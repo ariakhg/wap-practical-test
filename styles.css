@@ -1,0 +1,250 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap');
+
+:root {
+  --Orange: hsl(25, 97%, 53%);
+  --Almost-White: hsl(0, 0%, 98%);
+  --Light-Gray: hsl(217, 12%, 63%);
+  --Medium-Gray: hsl(0, 0%, 41%);
+  --Dark-Blue: hsl(213, 19%, 18%);
+  --Darker-Blue: hsl(215, 26%, 13%);
+  --Very-Dark-Blue: hsl(216, 12%, 8%);
+  --Almost-Black: hsl(0, 0%, 8%);
+}
+
+* {
+  font-family: "Epilogue", sans-serif;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  height: 100vh;
+  width: 100%;
+  background-color: var(--Very-Dark-Blue);
+}
+
+img {
+  max-width: 100%;
+}
+
+/* Right nav */
+.outlined-btn,
+.transparent-btn {
+  text-decoration: none;
+  padding: 1rem 2rem;
+  border-radius: 15px;
+  color: var(--Light-Gray);
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.transparent-btn:hover {
+  color: var(--Almost-White);
+  font-weight: 300;
+}
+
+.outlined-btn {
+  border: 1px solid var(--Light-Gray);
+}
+
+.outlined-btn:hover {
+  color: var(--Almost-White);
+  font-weight: 300;
+}
+
+/* Main register */ 
+.primary-btn {
+  background-image: linear-gradient(to bottom, #FF512F 0%, #f87b0e  51%, #FF512F  100%);
+  color: var(--Darker-Blue);
+  width: fit-content;
+  padding: 1rem 2rem;
+  text-decoration: none;
+  font-weight: 700;
+  border-radius: 15px;
+  cursor: pointer;
+}
+
+.primary-btn:hover {
+  background-image: var(--Almost-White);
+  background-color: var(--Almost-White);
+  font-weight: 700;
+}
+
+/* Nav Bar */
+nav {
+  height: 80px;
+  display: flex;
+  /* align-items: center; */
+}
+
+.nav-logo {
+  padding-top: 0.8rem;
+  width: 6rem;
+}
+
+.nav-container {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding-inline: 3rem;
+}
+
+.nav-left {
+  display: flex;
+}
+
+.nav-links {
+  display: flex;
+  margin-left: 4rem;
+  list-style: none;
+  gap: 2.5rem;
+}
+
+.nav-links li {
+  cursor: pointer;
+  color: var(--Light-Gray);
+  display: flex;
+  align-items: center;
+}
+
+.nav-links li:hover {
+  color: var(--Almost-White);
+}
+
+.outlined-btn:hover {
+  background-color: var(--Dark-Blue);
+}
+
+/* .mobile-menu-btn {
+  display: none;
+}
+
+.mobile-menu {
+  display: none;
+}
+
+.active .arrow {
+  transform: rotate(180deg);
+  transition: 0.2s;
+}
+
+.active-menu {
+  display: flex !important;
+} */
+
+/* Main styles */
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: calc(100vh - 80px);
+}
+
+.main-container {
+  display: grid;
+  max-width: 1100px;
+  gap: 5rem;
+  grid-template-columns: 1fr 1fr;
+}
+
+.main-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.main-heading {
+  font-family: "Share Tech Mono";
+  font-size: 4rem;
+  color: var(--Almost-White);
+}
+
+.main-content {
+  font-size: 18px;
+  line-height: 1.8;
+  color: var(--Light-Gray);
+}
+
+/* responsive to mobile */
+/* @media screen and (max-width: 800px) {
+  .nav-container {
+    padding-inline: 1rem;
+  }
+  .mobile-menu-btn {
+    display: flex;
+    cursor: pointer;
+    z-index: 999;
+  }
+  .mobile-menu {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    width: 70%;
+    background-color: var(--Almost-White);
+    padding: 5rem 2rem;
+  }
+  .mobile-links {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    list-style: none;
+  }
+  .mobile-links li {
+    display: flex;
+    color: var(--Medium-Gray);
+    flex-direction: column;
+    cursor: pointer;
+  }
+  .mobile-links li p {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .mobile-sub {
+    display: none;
+    flex-direction: column;
+    gap: 1rem;
+    margin: 1rem;
+  }
+  .overflow {
+    background-color: black;
+    display: none;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    width: 30%;
+    opacity: 0.7;
+  }
+  .nav-links {
+    display: none;
+  }
+  .nav-right {
+    display: none;
+  }
+  main {
+    align-items: flex-start;
+  }
+  .main-container {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+  .main-left {
+    align-items: center;
+    text-align: center;
+    gap: 2rem;
+  }
+  .main-heading {
+    font-size: 2.2rem;
+  }
+  .main-heading br {
+    display: none;
+  }
+} */
