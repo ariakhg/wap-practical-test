@@ -1,5 +1,8 @@
 <?php
+require 'sql.php'; // This will ensure that we are connected to the database
+
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Capture form data
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['psw'];
@@ -10,9 +13,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         die("Passwords do not match.");
     }
 
-    // Here you would typically hash the password and save the user to a database
-    // For demonstration, we'll just echo the values
-    echo "Registration successful for user: $username with email: $email";
+    // Hash the password for security
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+
+    // Prepare and bind
+    $stmt = $conn->prepare("INSERT INTO Users (username, email, password) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $username, $email, $hashed_password);
+
+    // Execute the statement
+    if ($stmt->execute()) {
+        echo "Registration successful for user: $username with email: $email";
+    } else {
+        echo "Error: " . $stmt->error;
+    }
+
+    // Close the statement and connection
+    $stmt->close();
+    $conn->close();
 }
 ?>
 
