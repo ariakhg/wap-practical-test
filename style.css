@@ -75,7 +75,6 @@ img {
 nav {
   height: 80px;
   display: flex;
-  /* align-items: center; */
 }
 
 .nav-logo {
@@ -217,7 +216,7 @@ input:focus {
   border-color: var(--Orange);
 }
 
-.registerbtn, .loginbtn {
+.formbtn {
   background-color: var(--Orange);
   width: 100%;
   padding: 0.8rem;
@@ -231,23 +230,30 @@ input:focus {
   transition: 0.3s ease;
 }
 
-.registerbtn:hover, .loginbtn:hover {
+.formbtn:hover {
   background-color: var(--Almost-White);
   transition: 0.3s ease;
 }
 
-.change {
+.form-change {
   color: var(--Light-Gray);
   text-align: center;
   font-size: 14px;
+  margin-top: 1rem;
 }
 
-.change a {
+.form-change a {
   color: var(--Light-Gray);
 }
 
-.change a:hover {
+.form-change a:hover {
   color: var(--Almost-White);
+}
+
+#form-error-message {
+  color: red;
+  font-size: 12px;
+  text-align: center;
 }
 
 /* responsive to mobile */
