@@ -1,5 +1,5 @@
 <?php
-require 'createSqlConnection.php'; // This will ensure that we are connected to the database
+require 'config/connection.php'; // This will ensure that we are connected to the database
 
 $error_message = "";
 
@@ -75,7 +75,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
             <label for="psw-repeat">Confirm Password</label>
             <input type="password" name="psw-repeat" id="psw-repeat" placeholder="Password" required><br>
             <p id="form-error-message">
-                <?= !empty($error_message) ? $error_message : ''; ?>
+                <?php echo !empty($error_message) ? $error_message : ''; ?>
             </p>
             <button type="submit" class="formbtn" name="register">Register</button>
             <div class="form-change">

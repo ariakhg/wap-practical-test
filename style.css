@@ -1,14 +1,14 @@
 @import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,100..900;1,100..900&family=Share+Tech+Mono&display=swap');
 
 :root {
-  --Orange: hsl(25, 97%, 53%);
-  --Almost-White: hsl(0, 0%, 98%);
-  --Light-Gray: hsl(217, 12%, 63%);
-  --Medium-Gray: hsl(0, 0%, 41%);
-  --Dark-Blue: hsl(213, 19%, 18%);
-  --Darker-Blue: hsl(215, 26%, 13%);
-  --Very-Dark-Blue: hsl(216, 12%, 8%);
-  --Almost-Black: hsl(0, 0%, 8%);
+  --Orange: #fb7413;
+  --Almost-White: #fafafa;
+  --Light-Gray: #959eac;
+  --Medium-Gray: #696969;
+  --Dark-Blue: #252d37;
+  --Darker-Blue: #19202a;
+  --Very-Dark-Blue: #121417;
+  --Almost-Black: #141414;
 }
 
 * {
@@ -23,6 +23,8 @@ body {
   width: 100%;
   background-color: var(--Very-Dark-Blue);
 }
+
+/* Landing Page */
 
 img {
   max-width: 100%;
@@ -92,7 +94,8 @@ nav {
   padding-inline: 3rem;
 }
 
-.nav-left {
+.nav-left,
+.nav-right {
   display: flex;
 }
 
@@ -192,16 +195,19 @@ article:hover {
 }
 
 h1.form-title {
+  text-align: center;
   margin-bottom: 1rem;
   color: var(--Almost-White);
 }
 
 label {
+  font-size: 14px;
   margin-top: 1rem; 
   color: var(--Light-Gray);
 }
 
 input {
+  font-size: 14px;
   width: 100%;
   padding: 0.8rem;
   margin-top: 0.5rem;
@@ -218,7 +224,7 @@ input:focus {
 
 .formbtn {
   background-color: var(--Orange);
-  width: 100%;
+  width: 50%;
   padding: 0.8rem;
   border: none;
   border-radius: 1rem;
@@ -226,8 +232,9 @@ input:focus {
   font-weight: 700;
   letter-spacing: 2px;
   cursor: pointer;
-  margin-top: 1rem;
   transition: 0.3s ease;
+  margin: 1rem auto 0.2rem auto;
+  display: block;
 }
 
 .formbtn:hover {
@@ -254,6 +261,72 @@ input:focus {
   color: red;
   font-size: 12px;
   text-align: center;
+}
+
+#form-success-message {
+  color: var(--Orange);
+  font-size: 12px;
+  text-align: center;
+}
+
+/* Home */
+.profile-btn img {
+  margin-top: 0.4rem;
+  width: 2rem;
+  border-radius: 50%;
+  transition: box-shadow 0.3s ease;
+}
+
+.profile-btn img:hover {
+  box-shadow: 0px 0px 10px 5px var(--Medium-Gray);
+}
+
+/* Profile */
+.profile-article {
+  display: flex;
+  max-width: 60%;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.profile-left {
+  display: flex;
+  flex-direction: column;
+  max-width: 30%;
+  height: 100%;
+}
+
+.profile-actions {
+  display: flex;
+  margin-top: auto;
+  margin-bottom: 0.8rem;
+}
+
+#cancelbtn {
+  background-color: var(--Light-Gray);
+  width: 43%;
+  padding: 1rem;
+  border: none;
+  border-radius: 1rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  color: var(--Very-Dark-Blue);
+  letter-spacing: 2px;
+  cursor: pointer;
+  margin: 1rem auto 0.2rem auto;
+  transition: 0.2s ease;
+  text-align: center;
+}
+
+#cancelbtn:hover {
+  background-color: var(--Almost-White);
+}
+
+button img {
+  width: 0.8rem;
+  margin-right: 0.3rem;
 }
 
 /* responsive to mobile */

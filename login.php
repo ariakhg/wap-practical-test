@@ -1,12 +1,11 @@
 <?php
-require 'createSqlConnection.php';
+require 'config/connection.php';
 session_start();
 
 $error_message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 
-    var_dump($_POST);
     //Capture form data
     $username = $_POST['username'];
     $password = $_POST['psw'];
@@ -18,30 +17,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
         $stmt->execute();
         $result = $stmt->get_result();
 
-        var_dump($result);
-
         // Check if the user exists
         if ($result->num_rows === 1) {
             // Fetch the hashed password from the database
             $row = $result->fetch_assoc();
             $hashed_password = $row['password'];
 
-            var_dump($hashed_password);
-
             // Verify the password
             if (password_verify($password, $hashed_password)) {
                 // Password is correct, log the user in
                 $_SESSION['username'] = $username; // Store username in session 
 
-                header("Location: home.php"); // Redirect to home page
+                header("Location: home.html"); // Redirect to home page
                 exit();
             } else {
                 // Incorrect password
-                $error_message = "Invalid username .";
+                $error_message = "Incorrect password.";
             }
         } else {
             // Username does not exist
-            $error_message = "Invalid username or password.";
+            $error_message = "Incorrect username or password.";
         }
 
         // Close the statement
@@ -72,7 +67,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
             <label for="psw">Password</label>
             <input type="password" name="psw" id="psw" placeholder="Password" required><br>
             <p id="form-error-message">
-                <?= !empty($error_message) ? $error_message : ''; ?>
+                <?php echo !empty($error_message) ? $error_message : ''; ?>
             </p>
             <button type="submit" class="formbtn" name="login">Log In</button>
             <div class="form-change">
