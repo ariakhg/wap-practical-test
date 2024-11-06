@@ -14,10 +14,18 @@ function getUserData($conn, $username) {
     return $stmt->get_result()->fetch_assoc();
 }
 
-// Update user data
-function updateUser($conn, $username, $new_username, $new_email, $hashed_new_password, $picture) {
-    $stmt = $conn->prepare("UPDATE Users SET username = ?, email = ?, password = ?, picture = ? WHERE username = ?");
-    $stmt->bind_param("sssss", $new_username, $new_email, $hashed_new_password, $picture, $username);
+// Update user data function
+function updateUser($conn, $username, $new_username, $new_email, $new_password = null) {
+    if ($new_password) {
+        // Update with password
+        $stmt = $conn->prepare("UPDATE Users SET username = ?, email = ?, password = ? WHERE username = ?");
+        $stmt->bind_param("ssss", $new_username, $new_email, $new_password, $username);
+    } 
+    else {
+        // Update without password
+        $stmt = $conn->prepare("UPDATE Users SET username = ?, email = ? WHERE username = ?");
+        $stmt->bind_param("sss", $new_username, $new_email, $username);
+    }
     return $stmt->execute();
 }
 
@@ -47,40 +55,55 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $new_password = $_POST['psw'];
     $confirm_password = $_POST['psw-repeat'];
 
-    // Validate password match
-    if ($new_password !== $confirm_password) {
-        $error_message = "Passwords do not match.";
-    } 
-    else {
-        $hashed_new_password = password_hash($new_password, PASSWORD_DEFAULT);
+    // Initialize response array
+    $response = ['success' => false, 'message' => ''];
 
-        // Use existing profile picture if unchanged
-        $picture = !empty($user['picture']) ? $user['picture'] : $default_image;
-
-        if (updateUser($conn, $username, $new_username, $new_email, $hashed_new_password, $picture)) {
-            $success_message = "Profile updated successfully.";
-            $_SESSION['username'] = $new_username; // Update session username
-
-            // Prepare JSON response
-            echo json_encode([
-                'success' => true,
-                'message' => $success_message,
-                'new_username' => $new_username,
-                'new_email' => $new_email,
-                'profile-picture' => $picture
-            ]);
-            exit();
+    // Check if password needs to be updated
+    if (!empty($new_password)) {
+        // Validate passwords match
+        if ($new_password !== $confirm_password) {
+            $response['success'] = false;
+            $response['message'] = "Passwords do not match.";
         } 
         else {
-            $error_message = "Error updating profile.";
+            // Hash the new password
+            $hashed_new_password = password_hash($new_password, PASSWORD_DEFAULT);
+            
+            // Update with new password
+            if (updateUser($conn, $username, $new_username, $new_email, $hashed_new_password)) {
+                $response['success'] = true;
+                $response['message'] = "Profile updated successfully with new password.";
+                $_SESSION['username'] = $new_username;
+                $response['new_username'] = $new_username;
+                $response['new_email'] = $new_email;
+            } 
+            else {
+                $response['success'] = false;
+                $response['message'] = "Error updating profile with new password.";
+            }
+        }
+    } 
+    else {
+        // Update without changing password
+        if (updateUser($conn, $username, $new_username, $new_email)) {
+            $response['success'] = true;
+            $response['message'] = "Profile updated successfully.";
+            $_SESSION['username'] = $new_username;
+            $response['new_username'] = $new_username;
+            $response['new_email'] = $new_email;
+        } 
+        else {
+            $response['success'] = false;
+            $response['message'] = "Error updating profile.";
         }
     }
 
-    // Prepare JSON response for errors
-    echo json_encode(['success' => false, 'message' => $error_message]);
+    // Send JSON response
+    echo json_encode($response);
     exit();
 }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">

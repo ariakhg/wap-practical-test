@@ -302,6 +302,7 @@ input:focus {
   flex-direction: column;
   max-width: 30%;
   height: 100%;
+  padding-top: 0.5rem;
 }
 
 .profile-actions {
@@ -343,6 +344,7 @@ button img {
   display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 0.5rem;
 }
 
 .profile-picture {
@@ -364,12 +366,12 @@ button img {
 
 .upload-btn {
   background-color: var(--Orange);
-  color: var(--Darker-Blue); 
+  color: var(--Almost-White); 
   padding: 0.5rem 1rem;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  margin-top: 0.2rem;
+  margin-top: 0.6rem;
   transition: 0.2s ease;
 }
 
