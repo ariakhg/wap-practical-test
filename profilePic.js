@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const formData = new FormData();
         formData.append('picture', file);
 
-        fetch('updateProfilePicture.php', {
+        fetch('profilePic.php', {
             method: 'POST',
             body: formData
         })
