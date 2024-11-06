@@ -1,3 +1,4 @@
+// User detail updates
 document.addEventListener('DOMContentLoaded', function() {
     const updateForm = document.getElementById('updateForm');
     const errorMessage = document.getElementById('form-error-message');

@@ -95,13 +95,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
         <article class="profile-article">
             <div class="profile-left">
                 <h1 class="form-title">Edit Profile</h1>
-                <picture>
-                    <img src="images/<?php echo $picture ?>" alt="profile picture"/>
-                </picture>
-                <input type="file" name="picture" id="picture" accept="image/*">
+                <div class="profile-picture-container">
+                    <img id="profile-image" class="profile-picture" 
+                        src="<?php echo $user['picture'] === 'images/profile.svg' ? 'images/profile.svg' : 'uploads/' . $user['picture']; ?>" 
+                        alt="Profile Picture"/>
+                        
+                    <div class="picture-upload-container">
+                        <input type="file" name="picture" id="picture" accept="image/*" class="profile-picture-input">
+                        <button type="button" id="uploadPicture" class="upload-btn">Upload Picture</button>
+                    </div>
+                </div>
 
                 <div class="profile-actions">
-                    <a id="cancelbtn" href="home.html">Cancel</a>
+                    <a id="cancelbtn" href="home.php">Cancel</a>
                     <button type="submit" class="formbtn" name="update">
                         <img src="images\editProfile.svg" alt="edit">
                         Save
@@ -123,5 +129,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
         </article>
     </form>
     <script src="script.js"></script>
+    <script src="profile.js"></script>
 </body>
 </html> 

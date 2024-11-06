@@ -28,7 +28,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
                 // Password is correct, log the user in
                 $_SESSION['username'] = $username; // Store username in session 
 
-                header("Location: home.html"); // Redirect to home page
+                header("Location: home.php"); // Redirect to home page
                 exit();
             } else {
                 // Incorrect password

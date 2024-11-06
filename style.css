@@ -281,6 +281,14 @@ input:focus {
   box-shadow: 0px 0px 10px 5px var(--Medium-Gray);
 }
 
+/* Navigation profile picture */
+.nav-right .profile-btn img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
 /* Profile */
 .profile-article {
   display: flex;
@@ -317,16 +325,61 @@ input:focus {
   cursor: pointer;
   margin: 1rem auto 0.2rem auto;
   transition: 0.2s ease;
-  text-align: center;
+  display: flex;
+  justify-content: center;
 }
 
 #cancelbtn:hover {
-  background-color: var(--Almost-White);
+  opacity: 0.8;
 }
 
 button img {
   width: 0.8rem;
   margin-right: 0.3rem;
+}
+
+/* Profile picture */
+.profile-picture-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--Orange);
+}
+
+.picture-upload-container {
+  flex-direction: column;
+  align-items: center;
+}
+
+.profile-picture-input {
+  display: none;
+}
+
+.upload-btn {
+  background-color: var(--Orange);
+  color: var(--Darker-Blue); 
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin-top: 0.2rem;
+  transition: 0.2s ease;
+}
+
+.upload-btn:hover {
+  opacity: 0.8;
+}
+
+.upload-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
 }
 
 /* responsive to mobile */

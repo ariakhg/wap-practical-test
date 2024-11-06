@@ -1,3 +1,16 @@
+<?php
+session_start();
+require 'config/connection.php';
+
+// Fetch user's profile picture
+$stmt = $conn->prepare("SELECT picture FROM Users WHERE username = ?");
+$stmt->bind_param("s", $_SESSION['username']);
+$stmt->execute();
+$result = $stmt->get_result();
+$user = $result->fetch_assoc();
+$profile_picture = $user['picture'] ?? 'profile.png';
+?>
+
 <!DOCTYPE html>
 <html lang="en">
     
@@ -23,7 +36,9 @@
 
         <div class="nav-right">
           <a class="transparent-btn" href="logout.php">Log Out</a>
-          <a class="profile-btn" href="profile.php"><img src="images/profile.svg" alt="Profile"></a>
+          <a class="profile-btn" href="profile.php">
+            <img src="<?php echo $profile_picture === 'images/profile.svg' ? 'images/profile.svg' : 'uploads/' . $profile_picture; ?>" alt="Profile">
+          </a>
         </div>
       </div>
     </nav>
