@@ -41,7 +41,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 
         $stmt->close();
     } else {
-        $error_message = "Error preparing the SQL statement.";
+        $error_message = "SQL statement error.";
     }
 
     $conn->close();
