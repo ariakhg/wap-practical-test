@@ -1,4 +1,6 @@
 <?php
+// 2. Create connection to phpMyAdmin
+
 $servername = "localhost";
 $username = "root";
 $password = "";

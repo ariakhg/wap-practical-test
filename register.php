@@ -4,7 +4,7 @@ require 'config/connection.php'; // This will ensure that we are connected to th
 $error_message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['register'])) {
-    // Capture form data
+    // Store registration form data
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['psw'];

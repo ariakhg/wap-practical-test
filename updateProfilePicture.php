@@ -2,43 +2,44 @@
 session_start();
 require 'config/connection.php';
 
+// Tells the browser to be prepared to handle JSON reponse
 header('Content-Type: application/json');
+// Create response array
 $response = ['success' => false, 'message' => '', 'picture' => ''];
 
+// Check if user is logged in
 if (!isset($_SESSION['username'])) {
     $response['message'] = 'User not logged in';
     echo json_encode($response);
     exit();
 }
 
+// Handle file upload
 if (isset($_FILES['picture']) && $_FILES['picture']['error'] === 0) {
     $allowed = ['jpg', 'jpeg', 'png', 'gif'];
     $filename = $_FILES['picture']['name'];
     $filesize = $_FILES['picture']['size'];
     $ext = strtolower(pathinfo($filename, PATHINFO_EXTENSION));
     
-    // Validate file type and size
+    // Validate file type
     if (!in_array($ext, $allowed)) {
         $response['message'] = 'Invalid file type. Allowed types: ' . implode(', ', $allowed);
         echo json_encode($response);
         exit();
     }
 
-    if ($filesize > 5242880) { // 5MB limit
-        $response['message'] = 'File is too large. Maximum size is 5MB.';
-        echo json_encode($response);
-        exit();
-    }
-
-    // Create uploads directory if it doesn't exist
+    // Create uploads directory if it doesn't exist - 0777 means perms to read, write, & execute for owner, group and others
     if (!file_exists('uploads')) {
         mkdir('uploads', 0777, true);
     }
 
+    // Generate unique filename
     $new_filename = uniqid() . '.' . $ext;
     $upload_path = 'uploads/' . $new_filename;
     
+    // Move file to uploads directory
     if (move_uploaded_file($_FILES['picture']['tmp_name'], $upload_path)) {
+        
         // Get current profile picture
         $stmt = $conn->prepare("SELECT picture FROM Users WHERE username = ?");
         $stmt->bind_param("s", $_SESSION['username']);

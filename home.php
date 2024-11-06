@@ -2,7 +2,7 @@
 session_start();
 require 'config/connection.php';
 
-// Fetch user's profile picture
+// Retrieve user's profile picture from Users database
 $stmt = $conn->prepare("SELECT picture FROM Users WHERE username = ?");
 $stmt->bind_param("s", $_SESSION['username']);
 $stmt->execute();
@@ -10,7 +10,7 @@ $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 $profile_picture = $user['picture'] ?? 'profile.png';
 
-// Fetch hackathons from the database
+// Retrieve hackathons from Hackathon database
 $sql = "SELECT * FROM Hackathons WHERE status = 'upcoming' ORDER BY start_date ASC";
 $result = $conn->query($sql);
 $hackathons = [];
@@ -34,10 +34,11 @@ $conn->close();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" sizes="32x32" href="images\YouCanHack.svg"/>
     <link rel="stylesheet" href="style.css" />
-    <title>You Can Hack</title>
+    <title>Home</title>
   </head>
 
   <body>
+    <!-- Navigation Bar -->
     <nav>
       <div class="nav-container">
         <div class="nav-left">
@@ -58,8 +59,10 @@ $conn->close();
       </div>
     </nav>
     
+    <!-- Main Content -->
     <main>
       <div class="hackathon-container">
+        <!-- Hackathon Listings -->
         <div class="hackathon-grid">
           <?php foreach ($hackathons as $hackathon): ?>
             <div class="hackathon-card" data-status="<?php echo $hackathon['status']; ?>">
@@ -70,7 +73,8 @@ $conn->close();
                   <?php echo ucfirst($hackathon['status']); ?>
                 </span>
               </div>
-                        
+              
+              <!-- Listing Details-->
               <div class="hackathon-content">
                 <h2><?php echo $hackathon['title']; ?></h2>
                   <p class="description"><?php echo $hackathon['description']; ?></p>

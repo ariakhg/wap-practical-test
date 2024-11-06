@@ -6,23 +6,17 @@ document.addEventListener('DOMContentLoaded', function() {
     const errorMessage = document.getElementById('form-error-message');
     const successMessage = document.getElementById('form-success-message');
 
-    // Handle profile picture upload
+    // Button click -> profile picture upload
     uploadButton.addEventListener('click', function() {
         pictureInput.click();
     });
 
+    // Handle file selection
     pictureInput.addEventListener('change', function() {
         const file = this.files[0];
         if (!file) return;
 
-        // Validate file size (5MB max)
-        if (file.size > 5 * 1024 * 1024) {
-            errorMessage.textContent = 'File is too large. Maximum size is 5MB.';
-            successMessage.textContent = '';
-            return;
-        }
-
-        // Validate file type
+        // Check file type
         const allowedTypes = ['image/jpeg', 'image/png', 'image/gif'];
         if (!allowedTypes.includes(file.type)) {
             errorMessage.textContent = 'Invalid file type. Please upload a JPG, PNG, or GIF.';
@@ -30,8 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
 
-        // Show loading state
-        uploadButton.textContent = 'Uploading...';
+        // Loading state
         uploadButton.disabled = true;
 
         // Show preview
@@ -49,13 +42,14 @@ document.addEventListener('DOMContentLoaded', function() {
             method: 'POST',
             body: formData
         })
+        // Convert response from server to JSON format
         .then(response => response.json())
         .then(data => {
             if (data.success) {
                 successMessage.textContent = data.message;
                 errorMessage.textContent = '';
                 
-                // Update all profile pictures on the page
+                // Update profile picture on the page
                 const profilePictures = document.querySelectorAll('.profile-btn img');
                 profilePictures.forEach(img => {
                     img.src = 'uploads/' + data.picture;
@@ -71,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
             console.error('Error:', error);
             errorMessage.textContent = 'An error occurred while updating the profile picture.';
             successMessage.textContent = '';
-            // Revert preview if upload failed
+            // Revert preview to original image if upload failed
             profileImage.src = profileImage.dataset.originalSrc;
         })
         .finally(() => {

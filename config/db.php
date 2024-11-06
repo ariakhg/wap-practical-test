@@ -1,4 +1,6 @@
 <?php
+// 1. Create database wapDB
+
 $servername = "localhost";
 $username = "root";
 $password = "";

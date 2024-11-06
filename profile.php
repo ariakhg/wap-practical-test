@@ -1,12 +1,12 @@
 <?php
-require 'config/connection.php';
 session_start();
+require 'config/connection.php';
 
 $error_message = "";
 $success_message = "";
 $default_image = 'images/profile.svg';
 
-// Retrieve user data
+// Retrieve user data function
 function getUserData($conn, $username) {
     $stmt = $conn->prepare("SELECT email, password, picture FROM Users WHERE username = ?");
     $stmt->bind_param("s", $username);
@@ -29,7 +29,7 @@ function updateUser($conn, $username, $new_username, $new_email, $new_password =
     return $stmt->execute();
 }
 
-// Check if user is logged in and fetch user data
+// Check if user is logged in and retrieve user data
 if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
     $user = getUserData($conn, $username);
@@ -43,12 +43,13 @@ if (isset($_SESSION['username'])) {
         $error_message = "User not found.";
     }
 } 
+// Redirect if user is not loggged in
 else {
     header("Location: login.php");
     exit();
 }
 
-// Handle form submission for updating user data
+// Handling of updating user data
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     $new_username = $_POST['username'];
     $new_email = $_POST['email'];
@@ -58,7 +59,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     // Initialize response array
     $response = ['success' => false, 'message' => ''];
 
-    // Check if password needs to be updated
+    // If password needs to be updated
     if (!empty($new_password)) {
         // Validate passwords match
         if ($new_password !== $confirm_password) {
@@ -84,7 +85,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
         }
     } 
     else {
-        // Update without changing password
+        // Update without new password
         if (updateUser($conn, $username, $new_username, $new_email)) {
             $response['success'] = true;
             $response['message'] = "Profile updated successfully.";
@@ -98,7 +99,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
         }
     }
 
-    // Send JSON response
     echo json_encode($response);
     exit();
 }
@@ -114,21 +114,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <!-- Profile Form -->
     <form id="updateForm" method="POST">    
         <article class="profile-article">
             <div class="profile-left">
                 <h1 class="form-title">Edit Profile</h1>
+                <!-- Profile Picture Section -->
                 <div class="profile-picture-container">
                     <img id="profile-image" class="profile-picture" 
                         src="<?php echo $user['picture'] === 'images/profile.svg' ? 'images/profile.svg' : 'uploads/' . $user['picture']; ?>" 
                         alt="Profile Picture"/>
-                        
                     <div class="picture-upload-container">
                         <input type="file" name="picture" id="picture" accept="image/*" class="profile-picture-input">
                         <button type="button" id="uploadPicture" class="upload-btn">Upload Picture</button>
                     </div>
                 </div>
-
+                <!-- Cancel and Save Button -->
                 <div class="profile-actions">
                     <a id="cancelbtn" href="home.php">Cancel</a>
                     <button type="submit" class="formbtn" name="update">
@@ -137,6 +138,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
                     </button>
                 </div>
             </div>
+            <!-- Profile Information Section -->
             <div class="profile-right">
                 <label for="username">Username</label>
                 <input type="text" name="username" id="username" value="<?php echo $username ?>" required><br>
@@ -152,6 +154,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
         </article>
     </form>
     <script src="script.js"></script>
-    <script src="profile.js"></script>
+    <script src="profilePic.js"></script>
 </body>
 </html> 

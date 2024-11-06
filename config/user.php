@@ -1,5 +1,7 @@
 <?php
-require_once 'connection.php';
+// 3. Create Users table
+
+require 'connection.php';
 
 $sql = "CREATE TABLE IF NOT EXISTS `Users` (
     `id`          INT(5) UNSIGNED AUTO_INCREMENT PRIMARY KEY,

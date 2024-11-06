@@ -1,12 +1,12 @@
 <?php
-require 'config/connection.php';
 session_start();
+require 'config/connection.php';
 
 $error_message = "";
 
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 
-    //Capture form data
+    //Store login form data
     $username = $_POST['username'];
     $password = $_POST['psw'];
 
@@ -19,19 +19,19 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
 
         // Check if the user exists
         if ($result->num_rows === 1) {
-            // Fetch the hashed password from the database
+            // Retrieve the hashed password from Users database
             $row = $result->fetch_assoc();
             $hashed_password = $row['password'];
 
             // Verify the password
             if (password_verify($password, $hashed_password)) {
-                // Password is correct, log the user in
-                $_SESSION['username'] = $username; // Store username in session 
+                //Store username in session
+                $_SESSION['username'] = $username; 
 
-                header("Location: home.php"); // Redirect to home page
+                // Redirect to home page
+                header("Location: home.php");
                 exit();
             } else {
-                // Incorrect password
                 $error_message = "Incorrect password.";
             }
         } else {
@@ -39,13 +39,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
             $error_message = "Incorrect username or password.";
         }
 
-        // Close the statement
         $stmt->close();
     } else {
         $error_message = "Error preparing the SQL statement.";
     }
 
-    // Close the database connection
     $conn->close();
 }
 ?>
