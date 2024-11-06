@@ -9,6 +9,21 @@ $stmt->execute();
 $result = $stmt->get_result();
 $user = $result->fetch_assoc();
 $profile_picture = $user['picture'] ?? 'profile.png';
+
+// Fetch hackathons from the database
+$sql = "SELECT * FROM Hackathons WHERE status = 'upcoming' ORDER BY start_date ASC";
+$result = $conn->query($sql);
+$hackathons = [];
+
+if ($result->num_rows > 0) {
+    while ($row = $result->fetch_assoc()) {
+        $hackathons[] = $row;
+    }
+} else {
+    echo "No hackathons found.";
+}
+
+$conn->close();
 ?>
 
 <!DOCTYPE html>
@@ -28,7 +43,7 @@ $profile_picture = $user['picture'] ?? 'profile.png';
         <div class="nav-left">
           <div class="nav-logo"><img src="images\YouCanHack.svg" alt="YouCanHack logo"/></div>
           <ul class="nav-links">
-            <li>Hack Base</li>
+            <li>Hack Base</></li>
             <li>Hack Community</li>
             <li>About</li>
           </ul>
@@ -44,11 +59,41 @@ $profile_picture = $user['picture'] ?? 'profile.png';
     </nav>
     
     <main>
-      <div class="main-container">
-        
-
+      <div class="hackathon-container">
+        <div class="hackathon-grid">
+          <?php foreach ($hackathons as $hackathon): ?>
+            <div class="hackathon-card" data-status="<?php echo $hackathon['status']; ?>">
+              <div class="hackathon-image">
+                <img src="<?php echo 'images/defaultHackathon.svg' ?>" 
+                  alt="<?php echo $hackathon['title']; ?>">
+                <span class="status-badge <?php echo $hackathon['status']; ?>">
+                  <?php echo ucfirst($hackathon['status']); ?>
+                </span>
+              </div>
+                        
+              <div class="hackathon-content">
+                <h2><?php echo $hackathon['title']; ?></h2>
+                  <p class="description"><?php echo $hackathon['description']; ?></p>
+                            
+                  <div class="hackathon-details">
+                    <div class="detail">
+                      <span><?php echo date('M d', strtotime($hackathon['start_date'])); ?> - 
+                        <?php echo date('M d, Y', strtotime($hackathon['end_date'])); ?></span>
+                    </div>
+                    <div class="detail">
+                        <span><?php echo $hackathon['location']; ?></span>
+                    </div>
+                  </div>
+                            
+                  <a href="<?php echo $hackathon['url']; ?>" class="hackathon-btn" target="_blank">
+                    Learn More
+                  </a>
+              </div>
+            </div>
+          <?php endforeach; ?>
+        </div>
+        <p id="more">More Coming Soon!</p>
       </div>
     </main>
-
   </body>
 </html>
