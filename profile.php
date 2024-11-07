@@ -113,6 +113,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['update'])) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+    <!-- Navigation Bar -->
+      <nav>
+        <div class="nav-container">
+          <div class="nav-left">
+            <div class="nav-logo"><img src="images\YouCanHack.svg" alt="YouCanHack logo"/></div>
+            <ul class="nav-links">
+              <li>Hack Base</></li>
+              <li>Hack Community</li>
+              <li>About</li>
+            </ul>
+          </div>
+
+          <div class="nav-right">
+            <a class="transparent-btn" href="logout.php">Log Out</a>
+            </a>
+          </div>
+        </div>
+      </nav>
+    </header>
     <!-- Profile Form -->
     <form id="updateForm" method="POST">    
         <article class="profile-article">

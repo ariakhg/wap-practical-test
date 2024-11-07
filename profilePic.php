@@ -37,7 +37,7 @@ if (isset($_FILES['picture']) && $_FILES['picture']['error'] === 0) {
     $new_filename = uniqid() . '.' . $ext;
     $upload_path = 'uploads/' . $new_filename;
     
-    // Move file to uploads directory
+    // Upload file path to database
     if (move_uploaded_file($_FILES['picture']['tmp_name'], $upload_path)) {
         
         // Get current profile picture

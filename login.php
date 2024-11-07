@@ -57,6 +57,24 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['login'])) {
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <header>
+      <nav>
+        <!-- Navigation Bar -->
+        <div class="nav-container">
+          <div class="nav-left">
+            <div class="nav-logo"><img src="images\youCanHack.svg" alt="YouCanHack logo"/></div>
+            <ul class="nav-links">
+              <li>About</li>
+            </ul>
+          </div>
+
+          <div class="nav-right">
+            <a class="transparent-btn" href="login.php">Login</a></li>
+            <a class="outlined-btn" href="register.php">Register</a></li>
+          </div>
+        </div>
+      </nav>
+    </header>
     <form action="login.php" method="POST">
         <article>
             <h1 class="form-title">Log In</h1>
